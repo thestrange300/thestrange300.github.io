@@ -1,0 +1,29 @@
+body{
+  font-family: 'FiraCode';
+  color: white;
+  font-size: 14px;
+  background-color: black;
+}
+
+@font-face {
+  font-family: 'FiraCode';
+  src: url('../font/FiraCode-VF.ttf') format('truetype');
+}
+
+.blinking-cursor {
+  font-weight: 100;
+  font-size: 14px;
+  font-family: 'FiraCode';
+  color: #2E3D48;
+  -webkit-animation: 1s blink step-end infinite;
+  animation: 1s blink step-end infinite;
+}
+
+@keyframes blink {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: white;
+  }
+}
