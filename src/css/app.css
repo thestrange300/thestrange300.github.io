@@ -10,20 +10,57 @@ body{
   src: url('../font/FiraCode-VF.ttf') format('truetype');
 }
 
-.blinking-cursor {
-  font-weight: 100;
-  font-size: 14px;
-  font-family: 'FiraCode';
-  color: #2E3D48;
-  -webkit-animation: 1s blink step-end infinite;
-  animation: 1s blink step-end infinite;
+/* body {
+  background: #000;
+  color: #0F0;
+  font-family: monospace;
+  height: 100vh;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  word-break: break-all;
+  margin: 0;
+  padding: 16px;
+} */
+
+#input {
+  display: inline;
+  outline: none;
+  visibility: visible;
+}
+
+/*
+  If you press the Insert key, the vertical line caret will automatically
+  be replaced by a one-character selection.
+*/
+#input::selection {
+  color: #000;
+  background: rgb(255, 255, 255);
+}
+
+#input:empty::before {
+  content: ' ';
 }
 
 @keyframes blink {
-  from, to {
-    color: transparent;
+  to {
+    visibility: hidden;
   }
-  50% {
-    color: white;
-  }
+}
+
+#input:focus + #caret {
+  animation: blink 1s steps(5, start) infinite;
+}
+
+#input.noCaret + #caret {
+  visibility: hidden;
+}
+
+#caret {
+  border: 0;
+  padding: 0;
+  outline: none;
+  background-color: rgb(255, 255, 255);
+  display: inline-block;
+  font-family: monospace;
 }
