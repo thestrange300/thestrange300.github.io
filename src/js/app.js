@@ -19,22 +19,48 @@ function focusAndMoveCursorToTheEnd(e) {
 
 function handleCommand(command) {
   const line = document.createElement('DIV');
+  var response = document.createElement("div");
   line.innerHTML = `<span style="color: #86e033;">guest@thestrange300.github.io</span>:<span style="color: #7db8f5;">~</span>$  ${ command }`;
-  history.appendChild(line);
+  response.innerHTML = line.innerHTML + "<br>" +" "+displayResponse(command);
+
   if (command=='') {
-    
+    history.appendChild(line);
   }
   else{
-    // displayResponse(command);
+    history.appendChild(response);
   }
 }
 
 function displayResponse(message) {
   var response = document.createElement("div");
   response.innerHTML = message + " juga";
-  document.body.appendChild(response);
+  var keywordResponses = {
+    "experience":
+    "└───Experience <br>&emsp; ├───Staff of Media and Information at Student Body of Airlangga University <br>&emsp; ├───Head of Artistic Departement at LPM FORMAT FST Unair <br>&emsp; └───Human Resource Staff at Airlangga Orchestra",
+    "apa kabar?": "Baik-baik saja, terima kasih sudah bertanya. Bagaimana dengan Anda?",
+    "Selamat pagi": "Selamat pagi juga!",
+    "Terima kasih": "Sama-sama!",
+    "Tchau": "Sampai jumpa lagi!"
+  };
+  
+  switch (message) {
+    case "experience":
+    case "apa kabar?":
+    case "Selamat pagi":
+    case "Terima kasih":
+    case "Tchau":
+      response.innerHTML = keywordResponses[message];
+      break;
+    default:
+      response.innerHTML = "Sorry, keyword not match";
+  }
+  return response.innerHTML;
 }
 
+function detectdict(response){
+  var response = document.createElement("div");
+  
+}
 
 document.addEventListener('selectionchange', () => {
   if (document.activeElement.id !== 'input') return;
@@ -63,6 +89,7 @@ input.addEventListener('input', () => {
     }
   
     input.textContent = lastLine;
+
     
     focusAndMoveCursorToTheEnd();
   }
@@ -79,15 +106,72 @@ document.addEventListener('keydown', (e) => {
   if (e.target !== input) focusAndMoveCursorToTheEnd();
 });
 
+const inputcontent = [];
+let index = inputcontent.length - 1;
+
+document.addEventListener("keydown", (event) => {
+  if (event.code === "ArrowUp") {
+    console.log(inputcontent);
+    input.textContent = inputcontent[index];
+    focusAndMoveCursorToTheEnd();
+    index--;
+    if (index < 0) {
+      index = 0;
+    }
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.code === "ArrowDown") {
+    console.log(inputcontent);
+    input.textContent = inputcontent[index];
+    focusAndMoveCursorToTheEnd();
+    index++;
+    if (index > inputcontent.length-1) {
+      index = inputcontent.length-1;
+    }
+  }
+});
+
 input.addEventListener('keydown', (e) => {    
   if (e.key === 'Enter') {
     e.preventDefault();
-        
+    
+    inputcontent.push(input.textContent);
     handleCommand(input.textContent);    
     input.textContent = '';
+    index = inputcontent.length - 1;
     focusAndMoveCursorToTheEnd();
   }
 });
 
 // Set the focus to the input so that you can start typing straigh away:
 input.focus();
+
+const starting = document.getElementById('starting');
+const dots = [".", "..", "..."];
+let indexanim = 0;
+let hide = document.getElementById('hiding');
+window.onload = animatetext();
+
+function animatetext() {
+  addDot();
+  setTimeout(removeText, 3000);
+  
+}
+
+function addDot() {
+  if (indexanim === 3) {
+    indexanim = 0;
+  }
+  starting.innerHTML = "starting" + dots[indexanim];
+  indexanim++;
+  addot = setTimeout(addDot, 500);
+}
+
+function removeText() {
+  starting.innerHTML = "";
+  clearTimeout(addot);
+  hide.style.display="block";
+  focusAndMoveCursorToTheEnd();
+}
