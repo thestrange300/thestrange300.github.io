@@ -145,8 +145,7 @@ input.addEventListener('keydown', (e) => {
   }
 });
 
-// Set the focus to the input so that you can start typing straigh away:
-input.focus();
+// Set the focus to the input so that you can start typing straight away:
 
 const starting = document.getElementById('starting');
 const dots = [".", "..", "..."];
@@ -174,4 +173,5 @@ function removeText() {
   clearTimeout(addot);
   hide.style.display="block";
   focusAndMoveCursorToTheEnd();
+  input.focus();
 }
