@@ -5,6 +5,12 @@ body{
   background-color: black;
 }
 
+pre{
+  font-family: 'FiraCode';
+  color: white;
+  font-size: 14px;
+}
+
 @font-face {
   font-family: 'FiraCode';
   src: url('../font/FiraCode-VF.ttf') format('truetype');
