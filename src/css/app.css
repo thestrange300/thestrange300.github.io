@@ -5,6 +5,10 @@ body{
   background-color: black;
 }
 
+a {
+  color: inherit;
+}
+
 pre{
   font-family: 'FiraCode';
   color: white;
