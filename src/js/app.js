@@ -61,7 +61,7 @@ function displayResponse(message) {
       history.innerHTML="";
       break;
     default:
-      response.innerHTML = "Sorry, keyword invalid";
+      response.innerHTML = "Sorry, invalid keyword";
   }
   return response.innerHTML;
 }
